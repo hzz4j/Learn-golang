@@ -1,6 +1,17 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
+
+func multiVar() {
+	var (
+		hello string = "Hello "
+		world string = "World"
+	)
+	fmt.Println(hello)
+	fmt.Println(world)
+}
 
 func main() {
 	// 自动类型推断
@@ -18,6 +29,8 @@ func main() {
 	// var tmp1  会报错：没有指定类型
 	var tmp2 int
 	fmt.Println(tmp2)
+
+	multiVar()
 }
 
 /**output
