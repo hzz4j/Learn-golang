@@ -44,5 +44,5 @@ func copySlice() {
 	s2 := make([]int, len(s1))
 	copy(s2, s1)
 	s2[0] = 100
-	fmt.Println(s1, s2)
+	fmt.Println(s1, s2) // [1 2 3] [100 2 3]
 }
