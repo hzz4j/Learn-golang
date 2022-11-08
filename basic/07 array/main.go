@@ -8,7 +8,17 @@ import (
 func main() {
 	// declareArray1()
 	// declareArray2()
-	iterateArray()
+	// iterateArray()
+	// arrayPointer()
+
+	a := [...]int{1, 2, 3}
+	transferArray(a)
+	fmt.Println(&a, a)
+}
+
+func transferArray(a [3]int) {
+	a[0] = 3
+	fmt.Println(&a[0])
 }
 
 func declareArray1() {
@@ -46,4 +56,10 @@ func iterateArray() {
 	for i, v := range a {
 		fmt.Println(i, v)
 	}
+}
+
+// 指针数组
+func arrayPointer() {
+	a := [3]*int{0: new(int), 2: new(int)}
+	fmt.Println(a) // [0xc0000180a8 <nil> 0xc0000180c0]
 }
