@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"rec_sys/common"
 	"rec_sys/filter"
@@ -27,12 +28,11 @@ func (rec *Recommender) Rec() []*common.Product {
 		}
 	}
 	log.Printf("一共召回了%d个商品\n", len(RecallMap))
-	RecallSlice := make([]*common.Product, len(RecallMap))
+	RecallSlice := make([]*common.Product, 0, len(RecallMap))
 
 	for _, product := range RecallMap {
 		RecallSlice = append(RecallSlice, product)
 	}
-
 	// 排序
 	begin := time.Now()
 	SortedResult := rec.Sort.Sort(RecallSlice)
@@ -49,4 +49,19 @@ func (rec *Recommender) Rec() []*common.Product {
 }
 
 func main() {
+	recommender := Recommender{
+		Recallers: []recall.Recaller{
+			&recall.HotRecaller{Tag: "hot"},
+		},
+		Sort: &sort.PriceSorter{Tag: "price sort"},
+		Filter: []filter.Filter{
+			&filter.SaleFilter{Tag: "sale filter"},
+		},
+	}
+
+	result := recommender.Rec()
+
+	for idx, product := range result {
+		fmt.Printf("第%d名: %+v\n", idx+1, product)
+	}
 }
