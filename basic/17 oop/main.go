@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-// go run main.go pop.go
+// go run .
 func main() {
 	WashProcedure(10, 5)
 	fmt.Println()
